@@ -1,7 +1,6 @@
-module.exports = {
-
+module.exports =  {
   development: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
       database: 'eda_sim_dev',
     },
@@ -9,35 +8,20 @@ module.exports = {
       min: 2,
       max: 10
     },
-    migrations: {
-      tableName: 'knex_migrations'
-    },
     seeds: {
       directory: './seeds/dev'
-    }
-  },
-
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'eda_sim_staging',
-    },
-    pool: {
-      min: 2,
-      max: 10
     },
     migrations: {
       tableName: 'knex_migrations'
-    },
-    seeds: {
-      directory: './seeds/stage'
     }
   },
-
   production: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      database: 'eda_sim_pro',
+      host: process.env.DBHOST,
+      database: process.env.DBNAME,
+      user:     process.env.DBUSER,
+      password: process.env.DBPASSWORD
     },
     pool: {
       min: 2,
@@ -45,10 +29,6 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations'
-    },
-    seeds: {
-      directory: './seeds/pro'
     }
   }
-
-};
+}
