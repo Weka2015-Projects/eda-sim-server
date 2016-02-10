@@ -4,6 +4,7 @@ import koaBody from 'koa-better-body'
 import knex from 'koa-knex'
 import mount from 'koa-mount'
 import path from 'path'
+import cors from 'koa-cors'
 
 const PORT = process.env.PORT || 4000
 const app = module.exports = koa()
@@ -76,3 +77,10 @@ app.use(mount('/api/v1', scores.middleware()))
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT} . . .`)
 })
+
+const options = {
+    origin: '*',
+    methods: ['GET', 'POST']
+}
+
+app.use(cors(options))

@@ -16,18 +16,22 @@
     "url": "https://github.com/Weka2015-Projects/eda-sim-server/issues"
   },
   "babel": {
-    "presets": ["es2015", "stage-0"]
+    "presets": [
+      "es2015",
+      "stage-0"
+    ]
   },
   "homepage": "https://github.com/Weka2015-Projects/eda-sim-server#readme",
   "dependencies": {
     "knex": "^0.9.0",
     "koa": "^1.1.2",
     "koa-better-body": "^1.0.17",
+    "koa-cors": "0.0.16",
     "koa-knex": "^0.7.5",
     "koa-mount": "^1.3.0",
     "koa-resource-router": "^0.4.0",
     "pg": "^4.4.4"
-  }, 
+  },
   "devDependencies": {
     "babel": "^6.3.26",
     "babel-core": "^5.4.0",
