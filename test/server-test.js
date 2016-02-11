@@ -1,4 +1,6 @@
-require ('co-mocha')
+const x = yield request.get('/api/v1/scores')
+      const scores = x.res.body.scores
+      expect(scores.length).to.equal(1)require ('co-mocha')
 const app = require('../server.js')
 const request = require('co-supertest').agent(app.listen())
 const expect = require('chai').expect
@@ -11,8 +13,8 @@ const knex = require('knex')({
 
 describe('Testing POST', () => {
    describe('POST /api/v1/scores', () => {
-    before(()=> knex.select().from('scores').del())
-    after(()=> knex.select().from('scores').del())
+    before(()=> knex('scores').del())
+    after(()=> knex('scores').del())
     it('returns 201 created if it the POST is valid', function *() {
       yield request.post('/api/v1/scores')
       .send({ score:{name: "katie", score: 2330}}).expect(201).end()
@@ -34,8 +36,8 @@ describe('Testing POST', () => {
 
 describe('Testing GET', () => {
   before(function *() {
-      yield knex.select().from('scores').del()
-      yield request.post('/api/v1/scores').send({ score:{name: "irene", score: 2323}}).expect(201).end()
+      yield knex('scores').del()
+      yield knex('scores').insert({id: 0, name: "irene", score: 2323})
   })
   after(()=> knex.select().from('scores').del())
   describe('GET /api/v1/scores', () => {
@@ -47,19 +49,20 @@ describe('Testing GET', () => {
       const scores = x.res.body.scores
       expect(scores.length).to.equal(1)
     })
-    it('Returns 404 Not Found if GET is invalid', function *() {
+    it('Returns 404 Not Found if GET is not found', function *() {
       yield request.get('/api/v1/notfound').expect(404).end()
     })
   })
   describe('GET /api/v1/scores/:id', () => {
-    xit('returns 200 OK if it the GET is valid', function *() {
-      yield request.get('/api/v1/scores/id').expect(200).end()
+    it('returns 200 OK if it the GET is valid', function *() {
+      yield request.get('/api/v1/scores/0').expect(200).end()
     })
-    xit('correctly returns the length of the array', function *() {
-      const x = yield knex.select('name').from('scores')
-      expect(x.length).to.equal(1)
+    it('correctly returns the id of the seleced object', function *() {
+      const x = yield request.get('/api/v1/scores/0')
+      const score = x.res.body.score
+      expect(score.id).to.equal(0)
     })
-    it('Returns 404 unprocessable entity if GET is invalid', function *() {
+    it('Returns 404 Not Found if GET is not found', function *() {
       yield request.get('/api/v1/scores/-1').expect(404).end()
     })
   })
