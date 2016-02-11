@@ -17,7 +17,7 @@ app.use(koaBody({
 app.use(knex({
   client: 'postgresql',
   connection: {
-    database: 'eda_sim_dev'
+    database: process.env.DBNAME || 'eda_sim_dev'
   }
 }))
 
