@@ -2,7 +2,23 @@ module.exports =  {
   development: {
     client: 'pg',
     connection: {
-      database: 'eda_sim_dev',
+      database: 'eda_sim_dev'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    seeds: {
+      directory: './seeds/dev'
+    },
+    migrations: {
+      tableName: 'knex_migrations'
+    }
+  },
+  test: {
+    client: 'pg',
+    connection: {
+      database: 'eda_sim_test'
     },
     pool: {
       min: 2,

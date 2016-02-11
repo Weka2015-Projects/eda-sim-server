@@ -14,12 +14,19 @@ app.use(koaBody({
   }
 }))
 
+var database = 'eda_sim_dev'
+
+const TARGET = process.env.npm_lifecycle_event
+if  (TARGET === 'test') {
+  database = 'eda_sim_test'
+}
+
 app.use(knex({
   client: 'pg',
   connection: {
     host     : process.env.DBHOST,
     port     : '5432',
-    database : process.env.DBNAME,
+    database : process.env.DBNAME || database,
     user:     process.env.DBUSER,
     password: process.env.DBPASSWORD
   },
@@ -44,7 +51,9 @@ const scores = new Resource('scores', {
       this.set('Location', `/scores/${res[0].id}`)
       this.body = { scores: res[0] }
     } catch (e) {
-      console.log('error', e)
+      if (TARGET !== 'test') {
+        console.log('error', e)
+      }
       this.status = 422
     }
   },

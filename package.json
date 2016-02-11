@@ -4,7 +4,7 @@
   "description": "our sweet server side of the game",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --configure jsx:"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -38,5 +38,12 @@
     "koa-resource-router": "^0.4.0",
     "pg": "^4.4.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "co-mocha": "^1.1.2",
+    "co-supertest": "0.0.10",
+    "knex-cleaner": "^1.1.1",
+    "mocha": "^2.4.5",
+    "supertest": "^1.1.0"
+  }
 }
