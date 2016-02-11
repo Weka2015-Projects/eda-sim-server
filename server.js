@@ -1,10 +1,10 @@
-import koa from 'koa'
-import Resource from 'koa-resource-router'
-import koaBody from 'koa-better-body'
-import knex from 'koa-knex'
-import mount from 'koa-mount'
-import path from 'path'
-import cors from 'koa-cors'
+var koa = require('koa')
+var Resource = require('koa-resource-router')
+var koaBody  = require('koa-better-body')
+var knex = require('koa-knex')
+var mount = require('koa-mount')
+var path = require('path')
+var cors = require('koa-cors')
 
 const PORT = process.env.PORT || 4000
 const app = module.exports = koa()
