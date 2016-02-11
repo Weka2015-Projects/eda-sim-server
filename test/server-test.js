@@ -1,6 +1,4 @@
-const x = yield request.get('/api/v1/scores')
-      const scores = x.res.body.scores
-      expect(scores.length).to.equal(1)require ('co-mocha')
+require ('co-mocha')
 const app = require('../server.js')
 const request = require('co-supertest').agent(app.listen())
 const expect = require('chai').expect
@@ -39,7 +37,9 @@ describe('Testing GET', () => {
       yield knex('scores').del()
       yield knex('scores').insert({id: 0, name: "irene", score: 2323})
   })
+
   after(()=> knex.select().from('scores').del())
+
   describe('GET /api/v1/scores', () => {
     it('returns 200 OK if it the GET is valid', function *() {
       yield request.get('/api/v1/scores').expect(200).end()
@@ -53,6 +53,7 @@ describe('Testing GET', () => {
       yield request.get('/api/v1/notfound').expect(404).end()
     })
   })
+
   describe('GET /api/v1/scores/:id', () => {
     it('returns 200 OK if it the GET is valid', function *() {
       yield request.get('/api/v1/scores/0').expect(200).end()
