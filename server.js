@@ -15,11 +15,17 @@ app.use(koaBody({
 }))
 
 app.use(knex({
-  client: 'postgresql',
+  client: 'pg',
   connection: {
-    database: process.env.DBNAME || 'eda_sim_dev'
-  }
+    host     : process.env.DBHOST,
+    port     : process.env.PORT,
+    database : process.env.DBNAME,
+    user:     process.env.DBUSER,
+    password: process.env.DBPASSWORD
+  },
+  searchPath: 'public'
 }))
+
 
 const scores = new Resource('scores', {
   index: function *(next) {
