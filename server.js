@@ -18,7 +18,7 @@ app.use(knex({
   client: 'pg',
   connection: {
     host     : process.env.DBHOST,
-    port     : process.env.PORT,
+    port     : '5432',
     database : process.env.DBNAME,
     user:     process.env.DBUSER,
     password: process.env.DBPASSWORD
