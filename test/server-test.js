@@ -47,7 +47,7 @@ describe('Testing GET', () => {
       const scores = x.res.body.scores
       expect(scores.length).to.equal(1)
     })
-    it('Returns 404 unprocessable entity if GET is invalid', function *() {
+    it('Returns 404 Not Found if GET is invalid', function *() {
       yield request.get('/api/v1/notfound').expect(404).end()
     })
   })
