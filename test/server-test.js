@@ -43,11 +43,12 @@ describe('Testing GET', () => {
       yield request.get('/api/v1/scores').expect(200).end()
     })
     it('corrrectly returns the length of the array', function *() {
-      const x = yield knex.select('name').from('scores')
-      expect(x.length).to.equal(1)
+      const x = yield request.get('/api/v1/scores')
+      const scores = x.res.body.scores
+      expect(scores.length).to.equal(1)
     })
     it('Returns 404 unprocessable entity if GET is invalid', function *() {
-      yield request.post('/api/v1/notfound').expect(404).end()
+      yield request.get('/api/v1/notfound').expect(404).end()
     })
   })
   describe('GET /api/v1/scores/:id', () => {
