@@ -94,7 +94,7 @@ app.listen(PORT, () => {
 })
 
 const options = {
-    origin: '*',
+    origin: 'https://enspiral-sim-academy.firebaseapp.com',
     methods: ['GET', 'POST']
 }
 
